@@ -42,6 +42,8 @@ class ViewController: UIViewController {
             self.view.addSubview(view)
         }
         
+        self.cardImage.isHidden = true
+        
         NSLayoutConstraint.activate([
             self.button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.button.widthAnchor.constraint(equalToConstant: 200),
@@ -84,6 +86,7 @@ class ViewController: UIViewController {
         animationGroup.setValue("curvedAnimation", forKey: "animationType")
         animationGroup.animations = [moveAnimation,scaleAnimation, opacityAnimation ]
         animationGroup.duration = 1.0
+        self.cardImage.isHidden = false
         cardImage.layer.add(animationGroup, forKey: "curvedAnimation")
     }
 
@@ -94,6 +97,7 @@ extension ViewController : CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if flag && anim.value(forKey: "animationType") as? String == "curvedAnimation" {
             cartImage.image = UIImage(named: "cart_filled")
+            self.cardImage.isHidden = true
         }
     }
 }
